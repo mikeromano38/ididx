@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ididX">
 <head>
 	<title>ididX: Your Professional Timeline</title>
 	<link title="timeline-styles" rel="stylesheet" href="//cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 	<link title="timeline-styles" rel="stylesheet" href="/styles/app.css">
 </head>
-<body>
+<body ng-controller="MainController">
 
 <header>
 	<h3 class='logo'>ididX</h3>
@@ -23,11 +23,15 @@
 	<div style="clear: both;"></div>
 </div>
 
-<div id='timeline-embed' style="width: 100%; height: 600px"></div>
+<div timeline config="timeline" style="width: 100%; height: 600px"></div>
 
 <div id="cover"></div>
 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 <script src="/scripts/app.js"></script>
+<script type="text/javascript" src="/scripts/main-controller.js"></script>
+<script type="text/javascript" src="/scripts/timeline-directive.js"></script>
+<script type="text/javascript" src="/scripts/timeline-model.js"></script>
 </body>
 </html>
