@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html ng-app="ididX">
+<html ng-app="ididX" ng-cloak>
 <head>
 	<title>ididX: Your Professional Timeline</title>
 	<link title="timeline-styles" rel="stylesheet" href="//cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
 	<link title="timeline-styles" rel="stylesheet" href="/styles/app.css">
+
+	<style type="text/css">
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+ 			 display: none !important;
+		}
+	</style>
 </head>
 <body ng-controller="MainController">
 
@@ -17,7 +23,7 @@
 </header>
 
 <div class="action-bar">
-	<button class="action-button">Add Achievement</button>
+	<button class="action-button" ng-click="modal.showModal()">Add Achievement</button>
 	<button class="action-button">Filter By Tag</button>
 	<button class="action-button">Share</button>
 	<div style="clear: both;"></div>
@@ -25,13 +31,20 @@
 
 <div timeline config="timeline" style="width: 100%; height: 600px"></div>
 
+<div modal config="modal">
+	<a ng-click="modal.hideModal()">Close</a>
+	<h1>Hello</h1>
+</div>
+
 <div id="cover"></div>
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script type="text/javascript" src="//code.angularjs.org/1.4.3/angular-animate.min.js"></script>
 <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 <script src="/scripts/app.js"></script>
 <script type="text/javascript" src="/scripts/main-controller.js"></script>
 <script type="text/javascript" src="/scripts/timeline-directive.js"></script>
 <script type="text/javascript" src="/scripts/timeline-model.js"></script>
+<script type="text/javascript" src="/scripts/modal-directive.js"></script>
 </body>
 </html>

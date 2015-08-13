@@ -32,6 +32,37 @@ header {
 	border-bottom: 1px solid #ccc;
 }
 
+[modal]{
+	position: fixed;
+	z-index: 100;
+}
+
+.modal {
+	padding: 20px;
+	width: 600px;
+	height: 400px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	border-radius: 8px;
+	background: white;
+	z-index: 10;
+}
+
+.modal-backdrop {
+	content: '';
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	z-index: -1;
+	top: 0;
+	left: 0;
+}
+
 .action-bar {
 	background: #ccc;
 	padding: 5px;
@@ -67,4 +98,25 @@ button:hover {
 	-webkit-transition: opacity .3s linear;
 	-moz-transition: opacity .3s linear;
 	transition: opacity .3s linear;
+}
+
+/*ANIMATIONS*/
+
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+  padding: 0 10px;
 }

@@ -1,4 +1,4 @@
-angular.module('ididX', []);
+angular.module('ididX', ['ngAnimate']);
 
 setTimeout(function(){
 	var cover = document.getElementById('cover');
