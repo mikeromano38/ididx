@@ -1,3 +1,9 @@
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
@@ -52,6 +58,46 @@ header {
 	z-index: 10;
 }
 
+.modal hr {
+	border-style: none;
+	border: 1px solid #eee;
+}
+
+input, textarea {
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background: #F0FFFF;
+}
+
+fieldset {
+	border: none;
+}
+
+.modal .action-button-wrapper {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 10px;
+	width: 100%;
+}
+
+.modal .action-button {
+	border: 1px solid #ccc;
+}
+
+label {
+	font-size: 13px;
+	color: #666;
+	margin-right: 10px;
+}
+
+.modal .close-button {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
 .modal-backdrop {
 	content: '';
 	position: fixed;
@@ -66,6 +112,31 @@ header {
 .action-bar {
 	background: #ccc;
 	padding: 5px;
+}
+
+.new-achievement-modal label {
+	display: inline-block;
+	text-align: right;
+	width: 100px;
+	vertical-align: top;
+} 
+
+.new-achievement-modal label.inline {
+	width: auto;
+}
+
+.new-achievement-modal label.left {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.new-achievement-modal textarea, .new-achievement-modal input:not([type="checkbox"]) {
+	width: 420px;
+}
+
+.new-achievement-modal ul {
+	list-style-type: none;
+	float: left;
 }
 
 button {
@@ -106,8 +177,6 @@ button:hover {
   line-height: 20px;
   opacity: 1;
   padding: 10px;
-  border: 1px solid black;
-  background: white;
 }
 
 .animate-show.ng-hide-add.ng-hide-add-active,

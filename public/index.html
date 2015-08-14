@@ -31,9 +31,52 @@
 
 <div timeline config="timeline" style="width: 100%; height: 600px"></div>
 
-<div modal config="modal">
-	<a ng-click="modal.hideModal()">Close</a>
-	<h1>Hello</h1>
+<div modal config="modal" class="new-achievement-modal">
+	<a class="close-button" ng-click="modal.hideModal()">Close</a>
+	<h3>Add Achievement</h3>
+	<hr />
+
+	<fieldset>
+		<label>Media Url</label><input type="text" ng-model="newAchievement.media.url" />
+	</fieldset>
+
+	<fieldset>
+		<label>Title</label><input type="text" ng-model="newAchievement.text.headline" />
+	</fieldset>
+
+	<fieldset>
+		<label>Description</label><textarea type="text" ng-model="newAchievement.text.text"></textarea>
+	</fieldset>
+
+	<fieldset>
+		<label>Month</label><select ng-model="newAchievement.start_date.month">
+			<option ng-repeat="month in newAchievement.availableMonths" value="{{month}}" ng-selected="month === newAchievement.start_date.month">{{month}}</option>
+		</select>
+		<label class="inline">Day</label><select ng-model="newAchievement.start_date.day">
+			<option ng-repeat="day in newAchievement.availableDays" value="{{day}}" ng-selected="day === newAchievement.start_date.day">{{day}}</option>
+		</select>
+		<label class="inline">Year</label><select ng-model="newAchievement.start_date.year">
+			<option ng-repeat="year in newAchievement.availableYears" value="{{year}}" ng-selected="year === newAchievement.start_date.year">{{year}}</option>
+		</select>
+	</fieldset>
+
+	<fieldset>
+		<ul>
+			<li ng-repeat="skill in newAchievement.availableSkills" ng-if="$index < 3">
+				<input type="checkbox" ng-model="skill.selected" ng-checked="skill.selected" /><label class="left">{{skill.name}}</label>
+			</li>
+		</ul>
+		<ul>
+			<li ng-repeat="skill in newAchievement.availableSkills" ng-if="$index >= 3">
+				<input type="checkbox" ng-model="skill.selected" ng-checked="skill.selected" /><label class="left">{{skill.name}}</label>
+			</li>
+		</ul>
+	</fieldset>
+
+	<div class="action-button-wrapper">
+		<button class="action-button" ng-click="addAchievementToTimeline( newAchievement )">Add To Timeline</button>
+		<button class="action-button prepopulate" ng-click="populateSampleAchievementData()">Prepopulate</button>
+	</div>
 </div>
 
 <div id="cover"></div>
@@ -46,5 +89,7 @@
 <script type="text/javascript" src="/scripts/timeline-directive.js"></script>
 <script type="text/javascript" src="/scripts/timeline-model.js"></script>
 <script type="text/javascript" src="/scripts/modal-directive.js"></script>
+<script type="text/javascript" src="/scripts/achievement-constructor.js"></script>
+<script type="text/javascript" src="/scripts/date-service.js"></script>
 </body>
 </html>

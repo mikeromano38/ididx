@@ -10,15 +10,25 @@ angular.module('ididX').directive('modal', function(){
 
 		transclude: true,
 
-		controller: function($scope){
+		controller: function( $scope, $element ){
+			var config = $scope.$eval( $element.attr('config') );
+
 			$scope.show = false;
 			
 			$scope.showModal = function(){
 				$scope.show = true;
+
+				if ( config && typeof config.onOpen === 'function' ){
+					config.onOpen();
+				}
 			};
 
 			$scope.hideModal = function(){
 				$scope.show = false;
+
+				if ( config && typeof config.onClose === 'function' ){
+					config.onClose();
+				}
 			};
 		},
 

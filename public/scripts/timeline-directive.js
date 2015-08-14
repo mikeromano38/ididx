@@ -10,6 +10,12 @@ angular.module('ididX').directive('timeline', function( TimelineModel, $timeout,
 			$timeout(function(){
 				var timeline = $window.timeline = scope.config.timeline = new VCO.Timeline( targetID, TimelineModel.data );
 				timeline.goToEnd();
+
+				timeline.addEventListener('added', function( data ){
+					$timeout(function(){
+						timeline.goToId( data.uniqueid );
+					}, 1000);
+				});
 			});
 		}
 	}

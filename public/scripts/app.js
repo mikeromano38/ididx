@@ -1,5 +1,6 @@
 angular.module('ididX', ['ngAnimate']);
 
+//could move this to directive
 setTimeout(function(){
 	var cover = document.getElementById('cover');
 	cover.style.opacity = 0;
