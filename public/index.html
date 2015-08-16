@@ -23,8 +23,11 @@
 </header>
 
 <div class="action-bar">
-	<button class="action-button" ng-click="modal.showModal()">Add Achievement</button>
-	<button class="action-button">Filter By Tag</button>
+	<button class="action-button" ng-click="modal.showModal()">Add New Achievement</button>
+	<button class="action-button" ng-click="editAchievement()">Edit Achievement</button>
+	<button class="action-button" ng-click="removeAchievement()">Remove Achievement</button>
+	<button class="action-button" ng-click="skillsModal.showModal()">Filter By Tag</button>
+	<button class="action-button" ng-disabled="!_unfilteredAchievements" ng-click="removeFilters()">Remove Filters</button>
 	<button class="action-button">Share</button>
 	<div style="clear: both;"></div>
 </div>
@@ -33,7 +36,7 @@
 
 <div modal config="modal" class="new-achievement-modal">
 	<a class="close-button" ng-click="modal.hideModal()">Close</a>
-	<h3>Add Achievement</h3>
+	<h3>{{modalAction}} Achievement</h3>
 	<hr />
 
 	<fieldset>
@@ -48,7 +51,7 @@
 		<label>Description</label><textarea type="text" ng-model="newAchievement.text.text"></textarea>
 	</fieldset>
 
-	<fieldset>
+	<fieldset ng-show="modalAction === 'New'">
 		<label>Month</label><select ng-model="newAchievement.start_date.month">
 			<option ng-repeat="month in newAchievement.availableMonths" value="{{month}}" ng-selected="month === newAchievement.start_date.month">{{month}}</option>
 		</select>
@@ -74,8 +77,30 @@
 	</fieldset>
 
 	<div class="action-button-wrapper">
-		<button class="action-button" ng-click="addAchievementToTimeline( newAchievement )">Add To Timeline</button>
-		<button class="action-button prepopulate" ng-click="populateSampleAchievementData()">Prepopulate</button>
+		<button class="action-button" ng-show="modalAction==='Edit'" ng-click="confirmEdit()">Confirm Edit</button>
+		<button class="action-button" ng-show="modalAction==='New'" ng-click="addAchievementToTimeline( newAchievement )">Add To Timeline</button>
+		<button class="action-button prepopulate" ng-show="modalAction==='New'" ng-click="populateSampleAchievementData()">Prepopulate</button>
+	</div>
+</div>
+
+<div modal config="skillsModal" class="new-achievement-modal">
+	<a class="close-button" ng-click="skillsModal.hideModal()">Close</a>
+	<h3>Filter By Skills</h3>
+	<hr />
+
+	<ul>
+		<li ng-repeat="skill in visibleSkills" ng-if="$index < 3">
+			<input type="checkbox" ng-disabled="numSkillsShown === 1 && skill.visible" ng-model="skill.visible" ng-checked="skill.visible" /><label class="left">{{skill.name}}</label>
+		</li>
+	</ul>
+	<ul>
+		<li ng-repeat="skill in visibleSkills" ng-if="$index >= 3">
+			<input type="checkbox" ng-disabled="numSkillsShown === 1 && skill.visible" ng-model="skill.visible" ng-checked="skill.visible" /><label class="left">{{skill.name}}</label>
+		</li>
+	</ul>
+
+	<div class="action-button-wrapper">
+		<button class="action-button" ng-click="filterSkills()">Filter Skills</button>
 	</div>
 </div>
 
@@ -91,5 +116,6 @@
 <script type="text/javascript" src="/scripts/modal-directive.js"></script>
 <script type="text/javascript" src="/scripts/achievement-constructor.js"></script>
 <script type="text/javascript" src="/scripts/date-service.js"></script>
+<script type="text/javascript" src="/scripts/skills-service.js"></script>
 </body>
 </html>

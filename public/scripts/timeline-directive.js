@@ -1,4 +1,4 @@
-angular.module('ididX').directive('timeline', function( TimelineModel, $timeout, $window ){
+angular.module('ididX').directive('timeline', function( TimelineModel, AchievementConstructor, $timeout, $window ){
 	return {
 		scope: {
 			config: '='
@@ -8,8 +8,24 @@ angular.module('ididX').directive('timeline', function( TimelineModel, $timeout,
 			el[0].id = targetID;
 
 			$timeout(function(){
-				var timeline = $window.timeline = scope.config.timeline = new VCO.Timeline( targetID, TimelineModel.data );
-				timeline.goToEnd();
+
+				scope.config.init = function( data ){
+					el.empty();
+
+					data.events = data.events.map(function(evt){
+						var evt1 = AchievementConstructor.create(evt);
+						evt1.end_date = undefined;
+						return evt1;
+					});
+
+					var timeline = $window.timeline = scope.config.timeline = new VCO.Timeline( targetID, data );
+
+					$timeout(function(){
+						timeline.goToEnd();
+					});
+				};
+
+				scope.config.init( TimelineModel.data );
 
 				timeline.addEventListener('added', function( data ){
 					$timeout(function(){

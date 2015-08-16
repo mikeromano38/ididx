@@ -1,10 +1,41 @@
-angular.module('ididX').controller('MainController', function( $scope, $timeout, AchievementConstructor, TimelineModel ){
-	
+angular.module('ididX').controller('MainController', function( $scope, $timeout, AchievementConstructor, TimelineModel, SkillsService ){
+
 	$scope.timeline = {};
+
+	$scope.skillsModal = {};
+
+	$scope._unfilteredAchievements;
+
+	$scope.numSkillsShown = SkillsService.getAvailableSkills().length;
+
+	$scope.visibleSkills = SkillsService.getAvailableSkills().map(function( skill ){
+		skill.visible = true;
+		return skill;
+	});
+
+	$scope.makeDatesValid = function( achievements ){
+		achievements.forEach(function( achievement ){
+			
+			if ( achievement.start_date.data ){
+
+				var date = achievement.start_date.data;
+
+				achievement.start_date = {};
+
+				achievement.start_date.day = date.day || 1; 
+				achievement.start_date.month = date.month || 1; 
+				achievement.start_date.year = date.year || new Date().getFullYear();	
+			}
+			
+		});
+
+		return achievements;
+	};
 
 	$scope.modal = {
 		
 		onOpen: function(){
+			$scope.modalAction = 'New';
 			$scope.newAchievement = AchievementConstructor.create();
 		},
 		
@@ -13,16 +44,145 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		}
 	};
 
-	$scope.addAchievementToTimeline = function( achievement ){
-		TimelineModel.data.events.push( achievement );
-		$scope.timeline.timeline.add( achievement );
-		$scope.modal.hideModal();
+	$scope.$watch('visibleSkills', function( data ){
+		if ( !data ) return;
 
-		var timeline = $scope.timeline.timeline;
+		$scope.numSkillsShown = data.filter(function( skill ){
+			return skill.visible;
+		}).length;
+	}, true );
+
+	$scope.filterSkills = function(){
+		
+		if ( !$scope._unfilteredAchievements  ){
+			$scope._unfilteredAchievements = angular.copy( $scope.timeline.timeline.config.events );
+		}
+
+		var achievements = angular.copy( $scope._unfilteredAchievements );
+		var skillsToShow = $scope.visibleSkills.filter(function( skill ){
+		
+			return skill.visible;
+		
+		}).map(function( skill ){ 
+
+			return skill.name ;
+		});
+
+		var visibleAchievements = [];
+
+		achievements.forEach(function( achievement ){
+			
+			var removeAchievement = true;
+
+			var skillsForAchievement = achievement.availableSkills.filter(function( aSkill ){
+				return aSkill.selected;
+			}).map(function( aSkill ){
+				return aSkill.name;
+			});
+
+			var present;
+
+			skillsToShow.forEach(function( skill ){
+				if (  skillsForAchievement.indexOf( skill ) > -1 && visibleAchievements.indexOf( achievement ) < 0  ){
+					if ( present ) return;
+					visibleAchievements.push( AchievementConstructor.create( achievement ) );
+					present = true;
+				}
+			});
+
+		});
+		
+		if ( visibleAchievements.length === 0 ){
+			alert( "This will result in no items on your timeline. Please refine your filter criteria.");
+			return;
+		}
+
+		$scope.timeline.init( angular.copy( { events: visibleAchievements } ) );
 
 		$timeout(function(){
-			timeline.goToId(timeline.config.events[timeline.config.events.length - 1].uniqueid)
+			$scope.skillsModal.hideModal();
 		});
+	};
+
+	$scope.removeFilters = function(){
+		$scope.visibleSkills.forEach(function( skill ){
+			skill.visible = true;
+		});
+
+		$scope.filterSkills();
+
+		$scope._unfilteredAchievements = undefined;
+	};
+
+	$scope.addAchievementToTimeline = function( achievement ){
+		var tmpAchievement = AchievementConstructor.create( achievement );
+		tmpAchievement.renderSkillsInText();
+
+		achievement.text.text = tmpAchievement.text.text;
+		TimelineModel.data.events.push( achievement );
+
+		if ( $scope._unfilteredAchievements ){
+			$scope._unfilteredAchievements.push( achievement );
+		}
+
+		$scope.timeline.timeline.add( achievement );
+		$scope.modal.hideModal();
+	};
+
+	$scope.removeAchievement = function(){
+		var removeId = $scope.timeline.timeline.current_id;
+		$scope.timeline.timeline.removeId( removeId );
+
+		if ( $scope._unfilteredAchievements ){
+			$scope._unfilteredAchievements.forEach(function( achievement, index ){
+				if ( achievement.uniqueid && achievement.uniqueid === removeId ){
+					$scope._unfilteredAchievements.splice( index, 1 );
+				}
+			});
+		}
+	};
+
+	$scope.confirmEdit = function(){
+		var slide = $scope.timeline.timeline.getCurrentSlide();
+		var removeId = $scope.timeline.timeline.current_id;
+
+		$scope.newAchievement.start_date.day = String( $scope.newAchievement.start_date.day );
+		$scope.newAchievement.start_date.month = String( $scope.newAchievement.start_date.month );
+		$scope.newAchievement.start_date.year = String( $scope.newAchievement.start_date.year );
+
+		$scope.addAchievementToTimeline( $scope.newAchievement );
+
+		$timeout(function(){
+			
+			if ( $scope._unfilteredAchievements ){
+				$scope._unfilteredAchievements.forEach(function( achievement, index ){
+					if ( achievement.uniqueid && achievement.uniqueid === removeId ){
+						$scope._unfilteredAchievements.splice( index, 1 );
+					}
+				});
+			}
+
+			$scope.timeline.timeline.removeId( removeId );
+
+			$scope.modal.hideModal();
+		}, 500 );
+	};
+
+	$scope.editAchievement = function(){
+		$scope.modal.showModal();
+		$scope.modalAction = 'Edit';
+
+		$scope.newAchievement = angular.copy( $scope.timeline.timeline.getCurrentSlide().data );
+
+		delete $scope.newAchievement.uniqueid;
+
+		$scope.newAchievement.text.text = $scope.newAchievement.text.text.replace(/<ul rel="__tag_string__">.*<\/ul>/g, '');
+
+		var date = $scope.newAchievement.start_date;
+
+		$scope.newAchievement.start_date.day = String( date.data.day ) || String( 1 ); 
+		$scope.newAchievement.start_date.month = String( date.data.month ) || String( 1 ); 
+		$scope.newAchievement.start_date.year = String( date.data.year ) || String( new Date().getFullYear() );
 	};
 
 	$scope.populateSampleAchievementData = function(){

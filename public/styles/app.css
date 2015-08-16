@@ -98,6 +98,10 @@ label {
 	top: 20px;
 }
 
+.modal .close-button:hover {
+	cursor: pointer;
+}
+
 .modal-backdrop {
 	content: '';
 	position: fixed;
@@ -188,4 +192,13 @@ button:hover {
 .animate-show.ng-hide {
   opacity: 0;
   padding: 0 10px;
+}
+
+li.tag {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px 10px;
+	background: blue;
+	color: white;
+	border-radius: 4px;
 }
