@@ -115,12 +115,12 @@
 	<table class="skills-matrix">
 		<thead>
 			<th>&nbsp;</th>
-			<th ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
+			<th ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="skill in visibleSkills">
+			<tr ng-repeat="skill in visibleSkills track by $index">
 				<td style="color: {{skill.color}}">{{skill.name}}</td>
-				<td ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements" ng-click="markSelected( achievement )"><i style="color: {{skill.color}}" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
+				<td ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )"><i style="color: {{skill.color}}" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
 			</tr>
 		</tbody>
 	</table>

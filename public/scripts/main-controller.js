@@ -9,6 +9,14 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 			if ( !$scope._unfilteredAchievements  ){
 				$scope._unfilteredAchievements = angular.copy( $scope.timeline.timeline.config.events );
 			}
+		},
+
+		onClose: function(){
+			if ( !$scope.filterActive ){
+				$scope._unfilteredAchievements.forEach(function( achievement ){
+					achievement.selected = false;
+				});
+			}
 		}
 	};
 
