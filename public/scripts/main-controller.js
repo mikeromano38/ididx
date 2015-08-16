@@ -26,7 +26,7 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 				achievement.start_date.month = date.month || 1; 
 				achievement.start_date.year = date.year || new Date().getFullYear();	
 			}
-			
+
 		});
 
 		return achievements;
@@ -146,14 +146,12 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		var slide = $scope.timeline.timeline.getCurrentSlide();
 		var removeId = $scope.timeline.timeline.current_id;
 
-		$scope.newAchievement.start_date.day = String( $scope.newAchievement.start_date.day );
-		$scope.newAchievement.start_date.month = String( $scope.newAchievement.start_date.month );
-		$scope.newAchievement.start_date.year = String( $scope.newAchievement.start_date.year );
-
 		$scope.addAchievementToTimeline( $scope.newAchievement );
 
 		$timeout(function(){
 			
+			$scope.timeline.timeline.removeId( removeId );
+
 			if ( $scope._unfilteredAchievements ){
 				$scope._unfilteredAchievements.forEach(function( achievement, index ){
 					if ( achievement.uniqueid && achievement.uniqueid === removeId ){
@@ -162,9 +160,9 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 				});
 			}
 
-			$scope.timeline.timeline.removeId( removeId );
-
 			$scope.modal.hideModal();
+
+
 		}, 500 );
 	};
 
@@ -172,9 +170,7 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		$scope.modal.showModal();
 		$scope.modalAction = 'Edit';
 
-		$scope.newAchievement = angular.copy( $scope.timeline.timeline.getCurrentSlide().data );
-
-		delete $scope.newAchievement.uniqueid;
+		$scope.newAchievement = AchievementConstructor.create( $scope.timeline.timeline.getCurrentSlide().data );
 
 		$scope.newAchievement.text.text = $scope.newAchievement.text.text.replace(/<ul rel="__tag_string__">.*<\/ul>/g, '');
 
