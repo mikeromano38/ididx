@@ -4,6 +4,18 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 
 	$scope.skillsModal = {};
 
+	$scope.skillsMatrixModal = {
+		onOpen: function(){
+			if ( !$scope._unfilteredAchievements  ){
+				$scope._unfilteredAchievements = angular.copy( $scope.timeline.timeline.config.events );
+			}
+		}
+	};
+
+	$scope.markSelected = function( achievement ){
+		achievement.selected = !achievement.selected;
+	};
+
 	$scope._unfilteredAchievements;
 
 	$scope.numSkillsShown = SkillsService.getAvailableSkills().length;
@@ -12,6 +24,42 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		skill.visible = true;
 		return skill;
 	});
+
+	// $scope.$watch('_unfilteredAchievements', function( data ){
+	// 	if ( data ){
+	// 		$scope._numSelected = data.filter(function( achievement ){
+	// 			return achievement.selected;
+	// 		}).length;
+
+	// 		if ( $scope._numSelected === 0 ){
+	// 			$scope.filterActive = false;
+	// 		}
+	// 	}
+	// }, true );
+
+	$scope.truncate = function( text, number ){
+		return text.slice( 0, number ) + '...';
+	};
+
+	$scope.updateTimelineForSelected = function(){
+		$scope.timeline.filterActive = true;
+
+		$scope.timeline.init( { events: $scope._unfilteredAchievements } );	
+
+		$scope.skillsMatrixModal.hideModal();
+	};
+
+	$scope.removeAllSelections = function(){
+		var achievements = $scope._unfilteredAchievements;
+
+		 achievements.forEach(function( achievement ){
+		 	achievement.selected = false;
+		 });	
+
+		 $scope.timeline.filterActive = false;
+
+		 $scope.timeline.init( { events: $scope._unfilteredAchievements } );	
+	};
 
 	$scope.makeDatesValid = function( achievements ){
 		achievements.forEach(function( achievement ){
@@ -104,15 +152,15 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		});
 	};
 
-	$scope.removeFilters = function(){
-		$scope.visibleSkills.forEach(function( skill ){
-			skill.visible = true;
-		});
+	// $scope.removeFilters = function(){
+	// 	$scope.visibleSkills.forEach(function( skill ){
+	// 		skill.visible = true;
+	// 	});
 
-		$scope.filterSkills();
+	// 	$scope.filterSkills();
 
-		$scope._unfilteredAchievements = undefined;
-	};
+	// 	$scope._unfilteredAchievements = undefined;
+	// };
 
 	$scope.addAchievementToTimeline = function( achievement ){
 		var tmpAchievement = AchievementConstructor.create( achievement );

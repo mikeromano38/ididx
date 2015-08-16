@@ -18,6 +18,12 @@ angular.module('ididX').directive('timeline', function( TimelineModel, Achieveme
 						return evt1;
 					});
 
+					if ( scope.config.filterActive ){
+						data.events = data.events.filter(function( achievement ){
+							return achievement.selected;
+						});
+					}
+
 					var timeline = $window.timeline = scope.config.timeline = new VCO.Timeline( targetID, data );
 
 					$timeout(function(){

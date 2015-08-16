@@ -16,12 +16,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "<p>This is an exercise I did as part of a Design Thinking in Innovative Branding class to visualize my design thinking process for a startup idea.</p>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": true },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": false  },
-					{ "name": "Public Relations", "selected": false  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": true },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": false  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": false  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -38,12 +38,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "This is an advertisement created as part of a Social Media Marketing class for The Big Draw 2015, an annual chalk art festival in Pleasanton, California. This exercise used a broad marketing objective to raise awareness and generate interest for The Big Draw."
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": true },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": false  },
-					{ "name": "Public Relations", "selected": false  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": true },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": false  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": false  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -60,12 +60,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "This was a Soundslides project incorporating audio and still photography for an Audio, Photography, and Production course at the University of Washington. <a href='https://candaceromano.github.io/' target='_blank'>View Here</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": false  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": false  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -82,12 +82,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "My blog and insights into my life as a mom to a food-allergic son. <a href='https://candaceromano.wordpress.com/' target='_blank'>View Here</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": false  },
-					{ "name": "Social Media", "selected": true  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": false  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": true  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -103,12 +103,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "Government. Simplified. <a href='https://www.facebook.com/indigovern'>View Here</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": true },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": false  },
-					{ "name": "Public Relations", "selected": false  },
-					{ "name": "Social Media", "selected": true  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": true },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": false  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": false  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": true  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -125,12 +125,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "This was a high profile article detailing the upcoming changes for Air Force Basic Military Training in 2006, garnering local and national news coverage. <a href='http://www.af.mil/News/ArticleDisplay/tabid/223/Article/132227/trainees-learn-attention-to-detail-through-warrior-mindset.aspx' target='_blank'>Read More</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": true  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": true  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -147,12 +147,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "Photo selected from submissions across the Air Force and featured in \"AF Week in Photos.\""
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": true  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": true  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -169,12 +169,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "News feature picked up by multiple military and defense outlets and local media. <a href='http://www.af.mil/News/ArticleDisplay/tabid/223/Article/127120/phase-team-keeps-f-16s-in-the-fight.aspx' target='_blank'>Read Feature</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": true  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": true  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -191,12 +191,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "Feature picked up by local and military news outlets. Direct marketed to featured Airmen's hometown newspapers. <a href='http://www.af.mil/News/Features/Display/tabid/273/Article/143504/balads-busy-aerial-port-supports-supplies-the-fight.aspx' target='_blank'>Read Feature</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": true  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": true  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }, 
 		      {
@@ -213,12 +213,12 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "text": "News article serving to boost morale and provide a different perspective of servicemembers' activities overseas. <a href='http://www.af.mil/News/ArticleDisplay/tabid/223/Article/127013/tops-in-blue-put-on-a-show-for-airmen-soldiers-at-balad.aspx' target='_blank'>Read Feature</a>"
 		        },
 		        "availableSkills": [
-		        	{ "name": "Marketing", "selected": false },
-					{ "name": "Communications", "selected": true  },
-					{ "name": "Journalism", "selected": true  },
-					{ "name": "Public Relations", "selected": true  },
-					{ "name": "Social Media", "selected": false  },
-					{ "name": "Education", "selected": false  }
+		        	{ "color": "#7e296b", "name": "Marketing", "selected": false },
+					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
+					{ "color": "#54585a", "name": "Journalism", "selected": true  },
+					{ "color": "#3489b4", "name": "Public Relations", "selected": true  },
+					{ "color": "#c98a1d", "name": "Social Media", "selected": false  },
+					{ "color": "#bd1c1c", "name": "Education", "selected": false  }
 		        ]
 		      }
 		    ]

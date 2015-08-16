@@ -12,6 +12,8 @@ angular.module('ididX').factory('AchievementConstructor', function( DateService,
 			text: ( config && config.text ) ? config.text.text : ''
 		};
 
+		this.selected = ( config ) ? config.selected : false;
+
 		this.availableSkills = ( config && config.availableSkills ) ? config.availableSkills : this.getAvailableSkills();
 
 		this.availableDays = DateService.days;
@@ -45,6 +47,14 @@ angular.module('ididX').factory('AchievementConstructor', function( DateService,
 		});
 	};
 
+	Achievement.fn.hasSkill = function( skill ){
+		var skill = this.availableSkills.filter(function( sk ){
+			return sk.name === skill.name;
+		})[0];
+
+		return skill && skill.selected;
+	};
+
 	Achievement.fn.renderSkillsInText = function(){
 		if ( this.availableSkills ){
 			//remove current tags if present
@@ -56,7 +66,7 @@ angular.module('ididX').factory('AchievementConstructor', function( DateService,
 			if ( this.availableSkills.filter(function( skill ){ return skill.selected }).length ) tagString += '<label>Tags:</label>';
 
 			for ( var skill in this.availableSkills ){
-				if ( this.availableSkills[ skill ].selected ) tagString += ( '<li class="tag">' + this.availableSkills[ skill ].name + '</li>' );
+				if ( this.availableSkills[ skill ].selected ) tagString += ( '<li class="tag" style="background-color: ' + this.availableSkills[ skill ].color + '">' + this.availableSkills[ skill ].name + '</li>' );
 			}
 
 			tagString += '</ul>';

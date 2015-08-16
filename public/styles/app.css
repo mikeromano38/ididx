@@ -31,11 +31,8 @@ a {
 }
 
 .utility-nav a {
+	color: #0b6952;
 	margin-left: 10px;
-}
-
-header {
-	border-bottom: 1px solid #ccc;
 }
 
 [modal]{
@@ -56,6 +53,11 @@ header {
 	border-radius: 8px;
 	background: white;
 	z-index: 10;
+}
+
+.skills-matrix .modal {
+	width: 90%;
+	height: 90%;
 }
 
 .modal hr {
@@ -102,6 +104,14 @@ label {
 	cursor: pointer;
 }
 
+h2.vco-headline {
+	color: #54585a !important;
+}
+
+.vco-timemarker.vco-timemarker-active .vco-timemarker-content-container .vco-timemarker-content .vco-timemarker-text h2.vco-headline {
+	color: #7e296b !important;
+}
+
 .modal-backdrop {
 	content: '';
 	position: fixed;
@@ -114,8 +124,19 @@ label {
 }
 
 .action-bar {
-	background: #ccc;
+	border-top: 3px solid #0b6952;
+	margin-top: 2px;
 	padding: 5px;
+}
+
+.action-bar .action-button {
+	background: none;
+	color: #7e296b;
+	font-size: 22px;
+}
+
+.action-bar .action-button:disabled {
+	opacity: .5;
 }
 
 .new-achievement-modal label {
@@ -175,6 +196,38 @@ button:hover {
 	transition: opacity .3s linear;
 }
 
+table.skills-matrix {
+	table-layout: fixed;
+	border-collapse:collapse
+}
+
+table.skills-matrix th, table.skills-matrix, td {
+	padding: 10px;
+	text-align: center;
+}
+
+.modal-heading {
+	color: #0b6952;
+}
+
+table.skills-matrix tr {
+	border-bottom: 1px solid #ccc !important;
+}
+
+table.skills-matrix th.selected {
+	border-bottom: 1px solid white !important;
+	background: #b9ecff;
+}
+
+table.skills-matrix td.selected {
+	border-bottom: 1px solid white !important;
+	background: #b9ecff;
+}
+
+table.skills-matrix th:hover, table.skills-matrix td:hover  {
+	cursor: pointer;
+}
+
 /*ANIMATIONS*/
 
 .animate-show {
@@ -201,4 +254,8 @@ li.tag {
 	background: blue;
 	color: white;
 	border-radius: 4px;
+}
+
+.vco-slidenav-previous .vco-slidenav-content-container .vco-slidenav-icon, .vco-slidenav-next .vco-slidenav-content-container .vco-slidenav-icon {
+	color: #7e296b;
 }

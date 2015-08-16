@@ -3,6 +3,7 @@
 <head>
 	<title>ididX: Your Professional Timeline</title>
 	<link title="timeline-styles" rel="stylesheet" href="//cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+	<link title="timeline-styles" rel="stylesheet" href="/styles/css/font-awesome.css">
 	<link title="timeline-styles" rel="stylesheet" href="/styles/app.css">
 
 	<style type="text/css">
@@ -13,8 +14,10 @@
 </head>
 <body ng-controller="MainController">
 
-<header>
-	<h3 class='logo'>ididX</h3>
+<header style="height: 40px;">
+	<h3 class='logo' style="height: 100%;">
+		<img src="/images/logo.png" style="height: 65%"/>
+	</h3>
 	<div class='utility-nav'>
 		<a href="#">Welcome, Candace</a>
 		<a href="#">Sign Out</a>
@@ -23,12 +26,12 @@
 </header>
 
 <div class="action-bar">
-	<button class="action-button" ng-click="modal.showModal()">Add New Achievement</button>
+	<button class="action-button" title="Add New Achievement" ng-click="modal.showModal()"><i class="fa fa-plus"></i></button>
 	<!-- <button class="action-button" ng-click="editAchievement()">Edit Achievement</button> -->
-	<button class="action-button" ng-click="removeAchievement()">Remove Achievement</button>
-	<button class="action-button" ng-click="skillsModal.showModal()">Filter By Tag</button>
-	<button class="action-button" ng-disabled="!_unfilteredAchievements" ng-click="removeFilters()">Remove Filters</button>
-	<button class="action-button">Share</button>
+	<button class="action-button" title="Remove Achievement" ng-click="removeAchievement()"><i class="fa fa-minus"></i></button>
+	<button class="action-button" title="Skills Filter Matrix" ng-click="skillsMatrixModal.showModal()"><i class="fa fa-tags"></i></button>
+	<button class="action-button" title="Remove Filters" ng-disabled="!timeline.filterActive" ng-click="removeAllSelections()"><i class="fa fa-ban"></i></button>
+	<button class="action-button"title="Share / Export" ><i class="fa fa-share-alt"></i></button>
 	<div style="clear: both;"></div>
 </div>
 
@@ -36,7 +39,7 @@
 
 <div modal config="modal" class="new-achievement-modal">
 	<a class="close-button" ng-click="modal.hideModal()">Close</a>
-	<h3>{{modalAction}} Achievement</h3>
+	<h3 class="modal-heading">{{modalAction}} Achievement</h3>
 	<hr />
 
 	<fieldset>
@@ -85,7 +88,7 @@
 
 <div modal config="skillsModal" class="new-achievement-modal">
 	<a class="close-button" ng-click="skillsModal.hideModal()">Close</a>
-	<h3>Filter By Skills</h3>
+	<h3 class="modal-heading">Filter By Skills</h3>
 	<hr />
 
 	<ul>
@@ -101,6 +104,29 @@
 
 	<div class="action-button-wrapper">
 		<button class="action-button" ng-click="filterSkills()">Filter Skills</button>
+	</div>
+</div>
+
+<div modal config="skillsMatrixModal" class="new-achievement-modal skills-matrix">
+	<a class="close-button" ng-click="skillsMatrixModal.hideModal()">Close</a>
+	<h3 class="modal-heading">Skills Matrix</h3>
+	<hr />
+
+	<table class="skills-matrix">
+		<thead>
+			<th>&nbsp;</th>
+			<th ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="skill in visibleSkills">
+				<td style="color: {{skill.color}}">{{skill.name}}</td>
+				<td ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements" ng-click="markSelected( achievement )"><i style="color: {{skill.color}}" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="action-button-wrapper">
+		<button class="action-button" ng-click="updateTimelineForSelected()">Update Timeline</button>
 	</div>
 </div>
 
