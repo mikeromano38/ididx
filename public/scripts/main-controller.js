@@ -80,24 +80,20 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		}
 	};
 
-	// $scope.$watch('_unfilteredAchievements', function( data ){
-	// 	if ( data ){
-	// 		$scope._numSelected = data.filter(function( achievement ){
-	// 			return achievement.selected;
-	// 		}).length;
-
-	// 		if ( $scope._numSelected === 0 ){
-	// 			$scope.filterActive = false;
-	// 		}
-	// 	}
-	// }, true );
+	$scope.$watch('_unfilteredAchievements', function( data ){
+		if ( data ){
+			$scope._numSelected = data.filter(function( achievement ){
+				return achievement.selected;
+			}).length;
+		}
+	}, true );
 
 	$scope.truncate = function( text, number ){
 		return text.slice( 0, number ) + '...';
 	};
 
 	$scope.updateTimelineForSelected = function(){
-		$scope.timeline.filterActive = true;
+		$scope.timeline.filterActive = $scope._numSelected > 0;
 
 		$scope.timeline.init( { events: $scope._unfilteredAchievements } );	
 
