@@ -1,7 +1,6 @@
 angular.module('ididX').controller('MainController', function( $scope, $timeout, AchievementConstructor, TimelineModel, SkillsService, $rootScope, $window, $sce ){
 
 	$rootScope.printData = $window.printData;
-	$rootScope.printData = TimelineModel.data.events;
 
 	$scope.timeline = {};
 
