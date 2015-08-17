@@ -1,8 +1,23 @@
-angular.module('ididX').controller('MainController', function( $scope, $timeout, AchievementConstructor, TimelineModel, SkillsService ){
+angular.module('ididX').controller('MainController', function( $scope, $timeout, AchievementConstructor, TimelineModel, SkillsService, $rootScope, $window, $sce ){
+
+	$rootScope.printData = $window.printData;
+	$rootScope.printData = TimelineModel.data.events;
 
 	$scope.timeline = {};
 
 	$scope.skillsModal = {};
+
+	$scope.shareModal = {};
+
+	$scope.trustAsSafe = function( html ){
+		return $sce.trustAsHtml( html );
+	};
+
+	$scope.getDateFromStartDate = function( date ){
+		var dateString = date.month + '/' + date.day + '/' + date.year;
+
+		return new Date( dateString ).toString().split(' ').slice(1, 4).join(' ');
+	};
 
 	$scope.skillsMatrixModal = {
 		onOpen: function(){
@@ -12,11 +27,29 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		},
 
 		onClose: function(){
-			if ( !$scope.filterActive ){
+			if ( !$scope.timeline.filterActive ){
 				$scope._unfilteredAchievements.forEach(function( achievement ){
 					achievement.selected = false;
 				});
 			}
+		}
+	};
+
+	$scope.getPrintMediaLink = function( achievement ){
+		if ( achievement.media && achievement.media.url ){
+			var url;
+
+			//TODO: fix this, this logic will not work under all circumstances
+			//Only for demo purposes
+			if ( achievement.media.url.match(/youtube|youtu\.be/) ){
+				url = '//img.youtube.com/vi/' + achievement.media.url.match(/\?v=(.*)&|\?v=(.*)$|youtu\.be\/(.*)$/)[1]  + '/0.jpg'	
+			}  else if ( achievement.media.url.match(/vimeo/) ) {
+				url = '//i.vimeocdn.com/video/508652593_640.jpg'
+			} else if ( achievement.media.url.match(/jpg|jpeg|png|gif/gi ) ){
+				url = achievement.media.url;
+			}
+			
+			return url;
 		}
 	};
 
@@ -32,6 +65,19 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 		skill.visible = true;
 		return skill;
 	});
+
+	$scope.shareForPrint = function(){
+		var win = $window.open('/');
+
+		if ( $scope.timeline.filterActive ){
+			win.printData = $scope._unfilteredAchievements.filter(function( ach ){
+				return ach.selected
+			});
+			debugger
+		} else {
+			win.printData = $scope._unfilteredAchievements || $scope.timeline.timeline.config.events;
+		}
+	};
 
 	// $scope.$watch('_unfilteredAchievements', function( data ){
 	// 	if ( data ){

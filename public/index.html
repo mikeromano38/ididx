@@ -12,127 +12,175 @@
 		}
 	</style>
 </head>
-<body ng-controller="MainController">
+<body ng-controller="MainController" ng-class="{print: printData}">
 
 <header style="height: 40px;">
 	<h3 class='logo' style="height: 100%;">
 		<img src="/images/logo.png" style="height: 65%"/>
 	</h3>
-	<div class='utility-nav'>
+	<div class="user-info" ng-if="printData">
+		<p>Candace Romano</p>
+		<p>206-535-5555</p>
+		<p>candace.romano@gmail.com</p>
+	</div>
+	<div class='utility-nav' ng-if="!printData">
 		<a href="#">Welcome, Candace</a>
 		<a href="#">Sign Out</a>
 	</div>
 	<div style="clear: both;"></div>
 </header>
 
-<div class="action-bar">
-	<button class="action-button" title="Add New Achievement" ng-click="modal.showModal()"><i class="fa fa-plus"></i></button>
-	<!-- <button class="action-button" ng-click="editAchievement()">Edit Achievement</button> -->
-	<button class="action-button" title="Remove Achievement" ng-click="removeAchievement()"><i class="fa fa-minus"></i></button>
-	<button class="action-button" title="Skills Filter Matrix" ng-click="skillsMatrixModal.showModal()"><i class="fa fa-tags"></i></button>
-	<button class="action-button" title="Remove Filters" ng-disabled="!timeline.filterActive" ng-click="removeAllSelections()"><i class="fa fa-ban"></i></button>
-	<button class="action-button"title="Share / Export" ><i class="fa fa-share-alt"></i></button>
-	<div style="clear: both;"></div>
-</div>
+<div ng-if="!printData">
 
-<div timeline config="timeline" style="width: 100%; height: 600px"></div>
+	<div class="action-bar">
+		<button class="action-button" title="Add New Achievement" ng-click="modal.showModal()"><i class="fa fa-plus"></i></button>
+		<!-- <button class="action-button" ng-click="editAchievement()">Edit Achievement</button> -->
+		<button class="action-button" title="Remove Achievement" ng-click="removeAchievement()"><i class="fa fa-minus"></i></button>
+		<button class="action-button" title="Skills Filter Matrix" ng-click="skillsMatrixModal.showModal()"><i class="fa fa-tags"></i></button>
+		<button class="action-button" title="Remove Filters" ng-disabled="!timeline.filterActive" ng-click="removeAllSelections()"><i class="fa fa-ban"></i></button>
+		<button class="action-button" title="Share / Export" ng-click="shareModal.showModal()"><i class="fa fa-share-alt"></i></button>
+		<div style="clear: both;"></div>
+	</div>
 
-<div modal config="modal" class="new-achievement-modal">
-	<a class="close-button" ng-click="modal.hideModal()">Close</a>
-	<h3 class="modal-heading">{{modalAction}} Achievement</h3>
-	<hr />
+	<div timeline config="timeline" style="width: 100%; height: 600px"></div>
 
-	<fieldset>
-		<label>Media Url</label><input type="text" ng-model="newAchievement.media.url" />
-	</fieldset>
+	<div modal config="modal" class="new-achievement-modal">
+		<a class="close-button" ng-click="modal.hideModal()">Close</a>
+		<h3 class="modal-heading">{{modalAction}} Achievement</h3>
+		<hr />
 
-	<fieldset>
-		<label>Title</label><input type="text" ng-model="newAchievement.text.headline" />
-	</fieldset>
+		<fieldset>
+			<label>Media Url</label><input type="text" ng-model="newAchievement.media.url" />
+		</fieldset>
 
-	<fieldset>
-		<label>Description</label><textarea type="text" ng-model="newAchievement.text.text"></textarea>
-	</fieldset>
+		<fieldset>
+			<label>Title</label><input type="text" ng-model="newAchievement.text.headline" />
+		</fieldset>
 
-	<fieldset ng-show="modalAction === 'New'">
-		<label>Month</label><select ng-model="newAchievement.start_date.month">
-			<option ng-repeat="month in newAchievement.availableMonths" value="{{month}}" ng-selected="month === newAchievement.start_date.month">{{month}}</option>
-		</select>
-		<label class="inline">Day</label><select ng-model="newAchievement.start_date.day">
-			<option ng-repeat="day in newAchievement.availableDays" value="{{day}}" ng-selected="day === newAchievement.start_date.day">{{day}}</option>
-		</select>
-		<label class="inline">Year</label><select ng-model="newAchievement.start_date.year">
-			<option ng-repeat="year in newAchievement.availableYears" value="{{year}}" ng-selected="year === newAchievement.start_date.year">{{year}}</option>
-		</select>
-	</fieldset>
+		<fieldset>
+			<label>Description</label><textarea type="text" ng-model="newAchievement.text.text"></textarea>
+		</fieldset>
 
-	<fieldset>
+		<fieldset ng-show="modalAction === 'New'">
+			<label>Month</label><select ng-model="newAchievement.start_date.month">
+				<option ng-repeat="month in newAchievement.availableMonths" value="{{month}}" ng-selected="month === newAchievement.start_date.month">{{month}}</option>
+			</select>
+			<label class="inline">Day</label><select ng-model="newAchievement.start_date.day">
+				<option ng-repeat="day in newAchievement.availableDays" value="{{day}}" ng-selected="day === newAchievement.start_date.day">{{day}}</option>
+			</select>
+			<label class="inline">Year</label><select ng-model="newAchievement.start_date.year">
+				<option ng-repeat="year in newAchievement.availableYears" value="{{year}}" ng-selected="year === newAchievement.start_date.year">{{year}}</option>
+			</select>
+		</fieldset>
+
+		<fieldset>
+			<ul>
+				<li ng-repeat="skill in newAchievement.availableSkills" ng-if="$index < 3">
+					<input type="checkbox" ng-model="skill.selected" ng-checked="skill.selected" /><label class="left">{{skill.name}}</label>
+				</li>
+			</ul>
+			<ul>
+				<li ng-repeat="skill in newAchievement.availableSkills" ng-if="$index >= 3">
+					<input type="checkbox" ng-model="skill.selected" ng-checked="skill.selected" /><label class="left">{{skill.name}}</label>
+				</li>
+			</ul>
+		</fieldset>
+
+		<div class="action-button-wrapper">
+			<button class="action-button" ng-show="modalAction==='Edit'" ng-click="confirmEdit()">Confirm Edit</button>
+			<button class="action-button" ng-show="modalAction==='New'" ng-click="addAchievementToTimeline( newAchievement )">Add To Timeline</button>
+			<button class="action-button prepopulate" ng-show="modalAction==='New'" ng-click="populateSampleAchievementData()">Prepopulate</button>
+		</div>
+	</div>
+
+	<div modal config="skillsModal" class="new-achievement-modal">
+		<a class="close-button" ng-click="skillsModal.hideModal()">Close</a>
+		<h3 class="modal-heading">Filter By Skills</h3>
+		<hr />
+
 		<ul>
-			<li ng-repeat="skill in newAchievement.availableSkills" ng-if="$index < 3">
-				<input type="checkbox" ng-model="skill.selected" ng-checked="skill.selected" /><label class="left">{{skill.name}}</label>
+			<li ng-repeat="skill in visibleSkills" ng-if="$index < 3">
+				<input type="checkbox" ng-disabled="numSkillsShown === 1 && skill.visible" ng-model="skill.visible" ng-checked="skill.visible" /><label class="left">{{skill.name}}</label>
 			</li>
 		</ul>
 		<ul>
-			<li ng-repeat="skill in newAchievement.availableSkills" ng-if="$index >= 3">
-				<input type="checkbox" ng-model="skill.selected" ng-checked="skill.selected" /><label class="left">{{skill.name}}</label>
+			<li ng-repeat="skill in visibleSkills" ng-if="$index >= 3">
+				<input type="checkbox" ng-disabled="numSkillsShown === 1 && skill.visible" ng-model="skill.visible" ng-checked="skill.visible" /><label class="left">{{skill.name}}</label>
 			</li>
 		</ul>
-	</fieldset>
 
-	<div class="action-button-wrapper">
-		<button class="action-button" ng-show="modalAction==='Edit'" ng-click="confirmEdit()">Confirm Edit</button>
-		<button class="action-button" ng-show="modalAction==='New'" ng-click="addAchievementToTimeline( newAchievement )">Add To Timeline</button>
-		<button class="action-button prepopulate" ng-show="modalAction==='New'" ng-click="populateSampleAchievementData()">Prepopulate</button>
+		<div class="action-button-wrapper">
+			<button class="action-button" ng-click="filterSkills()">Filter Skills</button>
+		</div>
 	</div>
+
+	<div modal config="skillsMatrixModal" class="new-achievement-modal skills-matrix">
+		<a class="close-button" ng-click="skillsMatrixModal.hideModal()">Close</a>
+		<h3 class="modal-heading">Skills Matrix</h3>
+		<hr />
+
+		<table class="skills-matrix">
+			<thead>
+				<th>&nbsp;</th>
+				<th ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="skill in visibleSkills track by $index">
+					<td style="color: {{skill.color}}">{{skill.name}}</td>
+					<td ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )"><i style="color: {{skill.color}}" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="action-button-wrapper">
+			<button class="action-button" ng-click="updateTimelineForSelected()">Update Timeline</button>
+		</div>
+	</div>
+
+	<div modal config="shareModal" class="new-achievement-modal">
+		<a class="close-button" ng-click="shareModal.hideModal()">Close</a>
+		<h3 class="modal-heading">Share Your Skills</h3>
+		<hr />
+
+		<ul class="share-list">
+			<li class="share-item"><a class="share-button" ng-click="shareForPrint()">
+					<i class="fa fa-file-text-o"></i>print
+				</a>
+			</li>
+			<li class="share-item"><a class="share-button" ng-click>
+					<i class="fa fa-envelope-o"></i>email
+				</a>
+			</li>
+			<li class="share-item"><a class="share-button" ng-click>
+					<i class="fa fa-facebook-official"></i>facebook
+				</a>
+			</li>
+			<li class="share-item"><a class="share-button" ng-click>
+					<i class="fa fa-linkedin-square"></i>linkedin
+				</a>
+			</li>
+		</ul>
+	</div>
+
 </div>
 
-<div modal config="skillsModal" class="new-achievement-modal">
-	<a class="close-button" ng-click="skillsModal.hideModal()">Close</a>
-	<h3 class="modal-heading">Filter By Skills</h3>
-	<hr />
-
-	<ul>
-		<li ng-repeat="skill in visibleSkills" ng-if="$index < 3">
-			<input type="checkbox" ng-disabled="numSkillsShown === 1 && skill.visible" ng-model="skill.visible" ng-checked="skill.visible" /><label class="left">{{skill.name}}</label>
+<div ng-if="printData">
+	<ul class="achievement-list">
+		<li class="print-achievement clearfix" ng-repeat="ach in printData track by $index">
+			<img ng-if="ach.media.url" ng-src="{{getPrintMediaLink(ach)}}" />
+			<div class="achievement-info">
+				<h3><span style="color: #7e296b; font-weight: normal;">{{getDateFromStartDate(ach.start_date)}} - </span>{{ach.text.headline}}</h3>
+				<p ng-bind-html="trustAsSafe( ach.text.text )"></p>
+			</div>
 		</li>
 	</ul>
-	<ul>
-		<li ng-repeat="skill in visibleSkills" ng-if="$index >= 3">
-			<input type="checkbox" ng-disabled="numSkillsShown === 1 && skill.visible" ng-model="skill.visible" ng-checked="skill.visible" /><label class="left">{{skill.name}}</label>
-		</li>
-	</ul>
-
-	<div class="action-button-wrapper">
-		<button class="action-button" ng-click="filterSkills()">Filter Skills</button>
-	</div>
 </div>
 
-<div modal config="skillsMatrixModal" class="new-achievement-modal skills-matrix">
-	<a class="close-button" ng-click="skillsMatrixModal.hideModal()">Close</a>
-	<h3 class="modal-heading">Skills Matrix</h3>
-	<hr />
-
-	<table class="skills-matrix">
-		<thead>
-			<th>&nbsp;</th>
-			<th ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
-		</thead>
-		<tbody>
-			<tr ng-repeat="skill in visibleSkills track by $index">
-				<td style="color: {{skill.color}}">{{skill.name}}</td>
-				<td ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )"><i style="color: {{skill.color}}" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<div class="action-button-wrapper">
-		<button class="action-button" ng-click="updateTimelineForSelected()">Update Timeline</button>
-	</div>
-</div>
 
 <div id="cover"></div>
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script type="text/javascript" src="//code.angularjs.org/1.4.4/angular-sanitize.js"></script>
 <script type="text/javascript" src="//code.angularjs.org/1.4.3/angular-animate.min.js"></script>
 <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 <script src="/scripts/app.js"></script>

@@ -1,4 +1,4 @@
-angular.module('ididX', ['ngAnimate']);
+angular.module('ididX', ['ngAnimate', 'ngSanitize']);
 
 //could move this to directive
 setTimeout(function(){

@@ -260,4 +260,122 @@ li.tag {
 	color: #7e296b;
 }
 
+.share-list {
+	width: 100%;
+	list-style-type: none;
+	padding: 0;
+}
+
+.share-item {
+	padding: 0;
+	width: 100%;
+	font-size: 20px;
+}
+
+.share-item i {
+	margin-right: 20px;
+}
+
+.share-button {
+	padding: 10px;
+	display: block;
+	color: #7e296b;
+	border-radius: 8px;
+}
+
+.share-button:hover {
+	cursor: pointer;
+	background: #b9ecff;
+	color: white;
+}
+
+.user-info p:first-child {
+	font-weight: bold;
+}
+
+.user-info p {
+	margin: 8px;
+}
+
+.print .logo {
+	float: right;
+	height: 40px !important;
+}
+
+.print header {
+	padding: 20px;
+	height: auto !important;
+	border-bottom: 1px solid #ccc;
+}
+
+.print .achievement-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+.print-achievement {
+	margin: 50px 20px 50px;
+}
+
+.print-achievement img {
+	float: left;
+	width: 25%;
+	margin-bottom: 50px;
+}
+
+.print-achievement .achievement-info {
+	float: right;
+	width: 70%;
+}
+
+.clearfix {
+	clear: both;
+}
+
+@media print {
+
+	@page 
+    {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+
+	.logo {
+		float: right;
+	}
+
+	.tag {
+		background: white;
+	}
+
+   .tag.Marketing {
+   		color: #7e296b;
+   		border: 2px solid #7e296b;
+   }
+
+   .tag.Communications {
+   		color: #ac9e44;
+   		border: 2px solid #7e296b;
+   }
+
+   .tag.Journalism {
+   		color: #54585a;
+   		border: 2px solid #54585a;
+   }
+
+   .tag.Public.Relations  {
+   		color: #3489b4;
+   		border: 2px solid #3489b4;
+   }
+
+   .tag.Social.Media  {
+   		color: #c98a1d;
+   		border: 2px solid #c98a1d;
+   }
+
+   .tag.Education  {
+   		color: #bd1c1c;
+   		border: 2px solid #bd1c1c;
+   }
+}
 

@@ -6,6 +6,15 @@ angular.module('ididX').factory('AchievementConstructor', function( DateService,
 		this.media = { 
 			url: ( config && config.media ) ? config.media.url : '' 
 		};
+
+		// this.type = ( config && config._media && config._media.options ) ? config._media.options.media_type : 
+		// 			( config  && config.type ) ? config.type : null;
+
+		// if ( !this.type && this.media.url ){
+		// 	if ( this.media.url.match(/youtube|youtu\.be/) ) this.type = 'youtube';
+		// 	if ( this.media.url.match(/vimeo/) ) this.type = 'vimeo';
+		// 	if ( this.media.url.match(/jpg|jpeg|png|gif/gi ) ) this.type = 'image';
+		// }
 		
 		this.text = { 
 			headline: ( config && config.text ) ? config.text.headline : '',
@@ -66,7 +75,7 @@ angular.module('ididX').factory('AchievementConstructor', function( DateService,
 			if ( this.availableSkills.filter(function( skill ){ return skill.selected }).length ) tagString += '<label>Tags:</label>';
 
 			for ( var skill in this.availableSkills ){
-				if ( this.availableSkills[ skill ].selected ) tagString += ( '<li class="tag" style="background-color: ' + this.availableSkills[ skill ].color + '">' + this.availableSkills[ skill ].name + '</li>' );
+				if ( this.availableSkills[ skill ].selected ) tagString += ( '<li class="tag ' + this.availableSkills[ skill ].name + '" style="background-color: ' + this.availableSkills[ skill ].color + '">' + this.availableSkills[ skill ].name + '</li>' );
 			}
 
 			tagString += '</ul>';

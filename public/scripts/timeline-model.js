@@ -15,6 +15,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "headline": "Design Thinking: Mindfulness of Process Reflection", 
 		          "text": "<p>This is an exercise I did as part of a Design Thinking in Innovative Branding class to visualize my design thinking process for a startup idea.</p>"
 		        },
+		        "type": "image",
 		        "availableSkills": [
 		        	{ "color": "#7e296b", "name": "Marketing", "selected": true },
 					{ "color": "#ac9e44", "name": "Communications", "selected": true  },
@@ -32,7 +33,8 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "month": "2", 
 		          "day": "25",
 		          "year": "2015"
-		        }, 
+		        },
+		        "type": "vimeo", 
 		        "text": {
 		          "headline": "Broad Marketing Objective: The Big Draw 2015", 
 		          "text": "This is an advertisement created as part of a Social Media Marketing class for The Big Draw 2015, an annual chalk art festival in Pleasanton, California. This exercise used a broad marketing objective to raise awareness and generate interest for The Big Draw."
@@ -55,6 +57,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "day": "15",
 		          "year": "2011"
 		        }, 
+		        "type": "image",
 		        "text": {
 		          "headline": "Soundslides: A Lifetime of Music", 
 		          "text": "This was a Soundslides project incorporating audio and still photography for an Audio, Photography, and Production course at the University of Washington. <a href='https://candaceromano.github.io/' target='_blank'>View Here</a>"
@@ -77,6 +80,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "day": "7",
 		          "year": "2013"
 		        }, 
+		        "type": "image",
 		        "text": {
 		          "headline": "Personal Blog - Wordpress", 
 		          "text": "My blog and insights into my life as a mom to a food-allergic son. <a href='https://candaceromano.wordpress.com/' target='_blank'>View Here</a>"
@@ -94,6 +98,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        "media": {
 		          "url": "//scontent.fsnc1-1.fna.fbcdn.net/hphotos-xtf1/v/t1.0-9/1459740_743603019008877_5507839168934526210_n.jpg?oh=8bdedc81e7ce35e1624f03f25bcf8d28&oe=564CFAB3"
 		        }, 
+		        "type": "image",
 		        "start_date": {
 		          "month": "1", 
 		          "year": "2014"
@@ -115,6 +120,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        "media": {
 		          "url": "//media.dma.mil/2006/Jan/17/2000569792/670/394/0/060117-F-0000S-006.JPG"
 		        }, 
+		        "type": "image",
 		        "start_date": {
 		          "month": "1", 
 		          "day": "17",
@@ -137,6 +143,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        "media": {
 		          "url": "//media.dma.mil/2007/May/11/2000491669/888/591/0/070425-F-0578M-925.JPG", 
 		        }, 
+		        "type": "image",
 		        "start_date": {
 		          "month": "4", 
 		          "day": "25",
@@ -159,6 +166,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        "media": {
 		          "url": "//media.dma.mil/2007/Apr/23/2000497050/670/394/0/070416-F-0199D-780.JPG"
 		        }, 
+		        "type": "image",
 		        "start_date": {
 		          "month": "4", 
 		          "day": "23",
@@ -181,6 +189,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        "media": {
 		          "url": "//media.dma.mil/2007/Mar/30/2000502791/670/394/0/070314-F-0199D-360.JPG"
 		        }, 
+		        "type": "image",
 		        "start_date": {
 		          "month": "3", 
 		          "day": "30",
@@ -203,6 +212,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        "media": {
 		          "url": "http://media.dma.mil/2007/May/01/2000494663/670/394/0/070501-F-0578M-253.JPG"
 		        }, 
+		        "type": "image",
 		        "start_date": {
 		          "month": "5", 
 		          "day": "1",
