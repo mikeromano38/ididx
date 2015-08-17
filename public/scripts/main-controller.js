@@ -13,7 +13,9 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 	};
 
 	$scope.getDateFromStartDate = function( date ){
-		var dateString = date.month + '/' + date.day + '/' + date.year;
+		var dateString;
+		var dateData = ( date.year ) ? date : date.data;
+		dateString = dateData.month + '/' + dateData.day + '/' + dateData.year;
 
 		return new Date( dateString ).toString().split(' ').slice(1, 4).join(' ');
 	};
