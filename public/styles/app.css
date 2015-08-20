@@ -4,6 +4,14 @@
 	box-sizing: border-box;
 }
 
+.skills-matrix-wrapper {
+	overflow: auto;
+}
+
+.skills-matrix-wrapper::-webkit-scrollbar {
+ display: none;
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
@@ -57,7 +65,7 @@ a {
 
 .skills-matrix .modal {
 	width: 90%;
-	height: 90%;
+	height: 500px;
 }
 
 .modal hr {

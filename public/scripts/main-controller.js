@@ -283,10 +283,10 @@ angular.module('ididX').controller('MainController', function( $scope, $timeout,
 	$scope.populateSampleAchievementData = function(){
 		var achievement = AchievementConstructor.create();
 
-		achievement.media.url = 'https://cbssanfran.files.wordpress.com/2011/11/csu-east-bay.jpg?w=420';
+		achievement.media.url = '/images/csu-east-bay.png';
 
-		achievement.text.headline = 'Graduated MBA Program';
-		achievement.text.text = ' East Bay prepares graduates for the new realities of today\'s rapidly changing, globally competitive and financially challenging environment... or something.';
+		achievement.text.headline = 'ididX startup gets funded';
+		achievement.text.text = 'A startup idea developed during the MBA program at California State University East Bay received $300K in funding during a pitch event.';
 		
 		var skill = achievement.availableSkills.filter(function(skill){
 			return skill.name === 'Education';

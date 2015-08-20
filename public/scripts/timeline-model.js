@@ -82,7 +82,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		        }, 
 		        "type": "image",
 		        "text": {
-		          "headline": "Personal Blog - Wordpress", 
+		          "headline": "Personal Blog: Wordpress", 
 		          "text": "My blog and insights into my life as a mom to a food-allergic son. <a href='https://candaceromano.wordpress.com/' target='_blank'>View Here</a>"
 		        },
 		        "availableSkills": [
@@ -127,7 +127,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "year": "2006"
 		        }, 
 		        "text": {
-		          "headline": "Trainees learn attention to detail through 'warrior' mindset", 
+		          "headline": "News: Trainees learn attention to detail through 'warrior' mindset", 
 		          "text": "This was a high profile article detailing the upcoming changes for Air Force Basic Military Training in 2006, garnering local and national news coverage. <a href='http://www.af.mil/News/ArticleDisplay/tabid/223/Article/132227/trainees-learn-attention-to-detail-through-warrior-mindset.aspx' target='_blank'>Read More</a>"
 		        },
 		        "availableSkills": [
@@ -150,7 +150,7 @@ angular.module('ididX').factory('TimelineModel', function( AchievementConstructo
 		          "year": "2007"
 		        }, 
 		        "text": {
-		          "headline": "Air Force Week in Photos", 
+		          "headline": "Award: Air Force Week in Photos", 
 		          "text": "Photo selected from submissions across the Air Force and featured in \"AF Week in Photos.\""
 		        },
 		        "availableSkills": [

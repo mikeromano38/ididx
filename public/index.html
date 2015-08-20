@@ -118,19 +118,21 @@
 		<a class="close-button" ng-click="skillsMatrixModal.hideModal()">Close</a>
 		<h3 class="modal-heading">Skills Matrix</h3>
 		<hr />
-
-		<table class="skills-matrix">
-			<thead>
-				<th>&nbsp;</th>
-				<th ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
-			</thead>
-			<tbody>
-				<tr ng-repeat="skill in visibleSkills track by $index">
-					<td style="color: {{skill.color}}">{{skill.name}}</td>
-					<td ng-class="{ selected: achievement.selected }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )"><i style="color: {{skill.color}}" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
-				</tr>
-			</tbody>
-		</table>
+		
+		<div class="skills-matrix-wrapper">
+			<table class="skills-matrix">
+				<thead>
+					<th style="position: fixed; background: white; min-width: 150px; width: 150px; height: 80px;">&nbsp;</th>
+					<th ng-class="{ selected: achievement.selected }" ng-style="{ paddingLeft: $index===0 ? '150px' : 0, width: $index===0 ? '300px' : '150px', minWidth: $index===0 ? '300px' : '150px' }" style="min-width: 150px; width: 150px; " ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )">{{truncate( achievement.text.headline, 30 )}}</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="skill in visibleSkills track by $index" style="height: 41px;">
+						<td style="color: {{skill.color}}; position: fixed; background: white; width: 150px;">{{skill.name}}</td>
+						<td ng-class="{ selected: achievement.selected }" ng-style="{ paddingLeft: $index===0 ? '150px' : 0 }" ng-repeat="achievement in _unfilteredAchievements track by $index" ng-click="markSelected( achievement )"><i style="color: {{skill.color}};" ng-show="achievement.hasSkill( skill )" class="fa fa-check-circle"></i></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
 		<div class="action-button-wrapper">
 			<button class="action-button" ng-click="updateTimelineForSelected()">Update Timeline</button>
