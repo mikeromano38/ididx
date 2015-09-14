@@ -24,7 +24,7 @@ angular.module('ididX').directive('timeline', function( TimelineModel, Achieveme
 						});
 					}
 
-					var timeline = $window.timeline = scope.config.timeline = new VCO.Timeline( targetID, data );
+					var timeline = $window.timeline = scope.config.timeline = new TL.Timeline( targetID, data );
 
 					$timeout(function(){
 						timeline.goToEnd();
